@@ -6,6 +6,7 @@
 \usepackage{lmodern}
 \usepackage[margin=2.5cm]{geometry}
 \usepackage{tabularx,array,fancyhdr}
+\usepackage{xltabular}
 \usepackage[table]{xcolor}
 \usepackage[hidelinks]{hyperref}
 
@@ -70,7 +71,9 @@
 La comparación considera cuándo se definen los requisitos, cómo se
 incorporan los cambios y en qué momentos participan las partes
 interesadas. La caracterización se basa en la sección 2 y la Tabla 2
-del material complementario de la práctica \cite{materialGA}.
+del material complementario de la práctica \cite{materialGA}
+y en el subtema sobre modelos de proceso de requisitos del recurso
+de la semana 2 \cite[sec.~2.1.1]{recursoS2}.
 
 \subsection{Modelo secuencial o en cascada}
 
@@ -107,6 +110,272 @@ se esperan cambios frecuentes y hay una persona con disponibilidad
 y autoridad para aclarar necesidades y decidir prioridades
 \cite{materialGA}.
 
+\section{Escenario 1: Extractora de aceite de palma}
+
+La Extractora Río Lindo necesita un sistema embebido que controle la
+temperatura y la presión de los esterilizadores, vigile el nivel de los
+tanques y bloquee las compuertas cuando exista presión. La planta ya
+registró dos desbordes y una quemadura. Las reglas de seguridad son
+estables, pero las interfaces de los sensores, la pantalla de operación
+y los reportes todavía requieren definición \cite[sec.~5.1]{materialGA}.
+
+\subsection{Matriz comparativa}
+
+\begingroup
+\small
+\setlength{\tabcolsep}{4pt}
+\begin{xltabular}{\textwidth}{|p{0.17\textwidth}|X|X|X|}
+\hline
+\rowcolor{gray!15}
+\textbf{Criterio} & \textbf{Cascada} &
+\textbf{Iterativo e incremental} & \textbf{Ágil} \\ \hline
+\endhead
+
+K1. Estabilidad y cambios &
+Los límites del fabricante permiten aprobar pronto los requisitos de
+seguridad. La elección de sensores en el tercer mes podría obligar a
+actualizar formalmente las interfaces. &
+Se fijan los requisitos de seguridad al inicio. Las interfaces se
+refinan en un ciclo posterior a la selección de sensores y válvulas. &
+La lista de trabajo puede reordenarse cuando se conozcan los equipos.
+Los cambios que afecten una protección requieren revisión y aprobación.
+\\ \hline
+
+K2. Partes interesadas &
+Las dos mañanas semanales del jefe de planta se pueden reservar para
+acuerdos y revisiones de fase. Hay que recoger aportes de los tres turnos
+antes de cerrar la especificación. &
+Se pueden programar revisiones al cierre de cada ciclo y rotar a los
+operadores invitados para obtener información de los tres turnos. &
+Las revisiones frecuentes requieren coordinar las dos mañanas del jefe
+de planta y la participación de operadores con horarios rotativos.
+\\ \hline
+
+K3. Tipo de sistema y criticidad &
+Los desbordes y la quemadura justifican definir temprano los bloqueos,
+las alarmas y sus pruebas antes de autorizar la puesta en marcha. &
+Permite probar por etapas el controlador y los sensores. La puesta en
+marcha queda condicionada a verificar las protecciones integradas. &
+Se pueden revisar pronto prototipos de pantalla y reportes. Cada cambio
+del controlador que afecte bloqueos requiere pruebas de regresión.
+\\ \hline
+
+K4. Riesgo principal &
+Si la especificación de interfaces se cierra antes del tercer mes, los
+sensores comprados podrían exigir cambios de diseño tardíos. &
+Una alarma puede pasar la prueba con señales simuladas y fallar al
+conectarla al sensor real. La integración debe probarse en cuanto se
+disponga del equipo. &
+Priorizar pantallas visibles podría relegar las pruebas de presión
+residual y reducir el tiempo para completar la evidencia de seguridad.
+\\ \hline
+
+K5. Documentación &
+Una especificación aprobada y un registro de pruebas por protección
+facilitan la revisión de la aseguradora. &
+Cada ciclo actualiza la especificación y su trazabilidad. Antes de
+operar, se consolida la evidencia exigida por la aseguradora. &
+Los criterios de aceptación de cada incremento se complementan con la
+especificación de seguridad aprobada y las pruebas que exige la
+aseguradora.
+\\ \hline
+\end{xltabular}
+\endgroup
+
+\subsection{Recomendación y riesgos}
+
+\textbf{Modelo recomendado: iterativo e incremental con aprobación
+formal de los requisitos de seguridad.}
+
+\begin{enumerate}
+    \item \textbf{Estabilidad (K1).} El fabricante ya define los límites
+    de temperatura y presión y los tiempos de bloqueo. Esos requisitos
+    pueden aprobarse al comienzo, mientras la integración se precisa
+    cuando se elijan los sensores en el tercer mes.
+    \item \textbf{Participación (K2).} Las dos mañanas semanales del jefe
+    de planta permiten programar revisiones de ciclo. Los operadores de
+    los distintos turnos pueden probar prototipos de pantalla y aclarar
+    qué información necesitan durante la operación.
+    \item \textbf{Criticidad y documentación (K3 y K5).} Los incidentes
+    registrados y la evidencia que exige la aseguradora justifican probar
+    las protecciones durante el desarrollo y reservar una verificación
+    integrada antes de operar.
+\end{enumerate}
+
+\textbf{Alternativas y tensión principal.}
+Cascada se ajusta a la estabilidad de las reglas de seguridad, pero
+cerrar todas las interfaces temprano aumentaría el retrabajo si el
+hardware elegido exige cambios. Un enfoque ágil facilitaría refinar la
+pantalla, pero el acceso parcial a los interesados y la aprobación formal
+de cada protección favorecen revisiones programadas. La tensión principal
+está entre aprobar temprano la seguridad y mantener abiertas las
+decisiones que dependen del hardware.
+
+\begin{itemize}
+    \item \textbf{Riesgo 1.} Los sensores reales se comportan de forma
+    distinta a los simulados. \textbf{Mitigación:} probar las interfaces
+    con simulación al inicio y repetir las pruebas con equipos reales
+    en cuanto estén disponibles.
+    \item \textbf{Riesgo 2.} Un cambio en el controlador altera un bloqueo
+    previamente aprobado. \textbf{Mitigación:} vincular cada protección
+    a sus pruebas, repetirlas después del cambio y registrar la nueva
+    aprobación antes de poner en marcha el sistema.
+\end{itemize}
+
+\subsection{Actores y marco de ingeniería de requisitos}
+
+El análisis de las actividades centrales y transversales y de los
+artefactos sigue el marco de Pohl presentado en el recurso de la
+semana 2 \cite[sec.~2.1.4]{recursoS2}.
+
+\begin{itemize}
+    \item \textbf{Gerencia y jefe de planta:} la gerencia define las
+    prioridades de producción y el jefe de planta explica el proceso y
+    revisa los avances en las reuniones programadas.
+    \item \textbf{Operadores de los tres turnos:} describen maniobras,
+    alarmas y problemas de operación. Revisan los prototipos de pantalla.
+    \item \textbf{Responsable de seguridad industrial y aseguradora:}
+    el responsable aprueba las funciones de protección. La aseguradora
+    exige la especificación aprobada y la evidencia de pruebas.
+    \item \textbf{Analista y equipo técnico:} el analista documenta y
+    negocia los requisitos. Los especialistas de software y electrónica
+    refinan las interfaces, y el encargado de pruebas verifica las
+    protecciones y conserva la evidencia.
+\end{itemize}
+
+\begin{itemize}
+    \item \textbf{Inicio.} Se elicitan las reglas de seguridad y se
+    documentan y negocian las prioridades. La validación comprueba con
+    el jefe de planta y el responsable de seguridad que las reglas
+    cubran los incidentes del caso. La gestión registra sus fuentes y
+    la versión aprobada. Artefactos: metas de seguridad, escenarios de
+    operación y especificación inicial.
+    \item \textbf{Ciclo de integración.} Se elicitan y documentan las
+    interfaces del hardware elegido y se negocian ajustes. Se valida
+    el comportamiento con el equipo técnico y se gestionan los cambios
+    y sus vínculos con las pruebas. Artefactos: requisitos de interfaz,
+    registro de cambios y resultados de integración.
+    \item \textbf{Cierre.} Se documentan las correcciones y se acuerda
+    el alcance de la puesta en marcha. Se validan los escenarios de
+    operación y se controla la versión aprobada de la especificación.
+    Artefactos: especificación final, matriz de trazabilidad y evidencia
+    de pruebas por protección.
+\end{itemize}
+
+\section{Escenario 2: Aplicación de pedidos de comida típica}
+
+Sabores de la Abuela Rosa recibe unos 70 pedidos diarios por mensajería.
+Durante las horas pico se pierden mensajes y se registran direcciones
+incorrectas. La aplicación debe ofrecer menú, pedidos para retiro o
+entrega y pago por transferencia. El equipo dispone de dos
+desarrolladores a medio tiempo, presupuesto fijo y 14 semanas antes
+de las fiestas de la ciudad \cite[sec.~5.2]{materialGA}.
+
+\subsection{Matriz comparativa}
+
+\begingroup
+\small
+\setlength{\tabcolsep}{4pt}
+\begin{xltabular}{\textwidth}{|p{0.17\textwidth}|X|X|X|}
+\hline
+\rowcolor{gray!15}
+\textbf{Criterio} & \textbf{Cascada} &
+\textbf{Iterativo e incremental} & \textbf{Ágil} \\ \hline
+\endhead
+
+K1. Estabilidad y cambios &
+Se puede fijar al inicio la operación de menú y pedidos. Cambiar el
+alcance de puntos a promociones después de aprobarlo generaría
+retrabajo o exigiría un ajuste formal. &
+Se entrega primero el flujo básico y se revisa en ciclos posteriores
+si conviene añadir puntos o promociones. &
+La dueña puede ajustar la prioridad entre puntos y promociones sin
+desplazar el flujo básico comprometido para las fiestas.
+\\ \hline
+
+K2. Partes interesadas &
+La dueña puede validar el alcance temprano. Las ideas de su hijo
+posteriores a la aprobación se evalúan como solicitudes de cambio. &
+La dueña prueba al cierre de cada ciclo. El equipo incorpora sus
+observaciones en el siguiente incremento. &
+La disponibilidad diaria de la dueña permite resolver dudas y validar
+avances frecuentes. Ella puede decidir qué propuestas de su hijo se
+incorporan.
+\\ \hline
+
+K3. Tipo de sistema y criticidad &
+El alcance inicial debe incluir conciliación de transferencias,
+protección de datos y pruebas con Android de gama baja y señal
+intermitente. &
+Los incrementos permiten probar por etapas el pedido, la conciliación
+y la recuperación tras un corte de conexión, y luego verificar el
+recorrido completo. &
+Los criterios de aceptación de cada incremento pueden exigir un
+comportamiento verificable ante cortes de conexión y confirmar que
+el estado del pago concuerda con la transferencia.
+\\ \hline
+
+K4. Riesgo principal &
+Detectar cerca de las fiestas que el flujo sigue perdiendo pedidos
+dejaría poco margen para corregirlo. &
+Si pedido y pago se prueban por separado durante demasiado tiempo,
+pueden aparecer pedidos sin conciliar en la integración final. &
+Aceptar todas las ideas nuevas puede agotar las 14 semanas y el
+presupuesto de un equipo de dos personas a medio tiempo.
+\\ \hline
+
+K5. Documentación &
+La especificación inicial documenta el alcance acordado por precio
+fijo, el tratamiento de datos de clientes y las reglas de pago. &
+Se versionan el alcance y los criterios de aceptación de cada
+incremento. Se conserva evidencia de las pruebas de pagos y datos. &
+La lista priorizada registra cambios y decisiones. Se documentan
+también los criterios sobre datos personales, pagos y conectividad.
+\\ \hline
+\end{xltabular}
+\endgroup
+
+\subsection{Recomendación y riesgos}
+
+\textbf{Modelo recomendado: ágil con alcance inicial priorizado.}
+
+\begin{enumerate}
+    \item \textbf{Cambios (K1).} La dueña alterna entre un programa de
+    puntos y promociones diarias. Una lista priorizada permite aplazar
+    esas funciones mientras el equipo resuelve la pérdida de pedidos y
+    los errores de dirección.
+    \item \textbf{Participación (K2).} La dueña responde a diario y acepta
+    probar cada versión. El equipo puede validar temprano el flujo de
+    pedido, retiro y entrega, y corregirlo antes de las fiestas.
+    \item \textbf{Riesgo y plazo (K4).} Con 14 semanas, presupuesto fijo
+    y dos desarrolladores a medio tiempo, los ciclos cortos permiten
+    medir el avance del flujo esencial: menú, pedido, retiro o entrega
+    y conciliación de transferencias.
+\end{enumerate}
+
+\textbf{Alternativas y tensión principal.}
+Cascada ayudaría a fijar el alcance del acuerdo, pero los cambios
+frecuentes de prioridad exigirían revisar esa especificación. Un
+enfoque iterativo e incremental con alcance fijado por ciclo también
+permitiría validar avances. En este caso, la disponibilidad diaria
+de la dueña favorece un enfoque ágil con decisiones de prioridad
+frecuentes. La tensión principal es aprovechar esa participación
+sin comprometer la fecha ni el presupuesto.
+\newpage
+\begin{itemize}
+    \item \textbf{Riesgo 1.} Las promociones, los puntos o el pago con
+    tarjeta desplazan funciones necesarias para la salida inicial.
+    \newline
+    \textbf{Mitigación:} acordar con la dueña el alcance mínimo para
+    las fiestas y evaluar cada cambio según la capacidad que queda.
+    \item \textbf{Riesgo 2.} Un corte de conexión al enviar un pedido
+    provoca que el cliente lo repita o que quede sin conciliar.
+    \newline
+    \textbf{Mitigación:} asignar un identificador único al pedido,
+    mostrar si el envío fue confirmado y probar reintentos y
+    conciliación con conexión intermitente.
+\end{itemize}
+\newpage
 \printbibliography[title={Referencias}]
 
 \section*{Declaración de uso de inteligencia artificial}
