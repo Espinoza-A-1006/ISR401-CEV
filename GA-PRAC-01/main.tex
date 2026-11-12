@@ -1,0 +1,119 @@
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish]{babel}
+\usepackage{lmodern}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{tabularx,array,fancyhdr}
+\usepackage[table]{xcolor}
+\usepackage[hidelinks]{hyperref}
+
+\setlength{\headheight}{14pt}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt}
+\setlength{\emergencystretch}{1.5em}
+\renewcommand{\arraystretch}{1.23}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small UTEQ \textperiodcentered{} Ingeniería de Requerimientos}
+\fancyhead[R]{\small GA-PRAC-01}
+\fancyfoot[L]{\small Grupo CEV}
+\fancyfoot[R]{\small Página \thepage}
+
+\addto\captionsspanish{\renewcommand{\refname}{Referencias}}
+\usepackage[backend=biber,style=ieee]{biblatex}
+\addbibresource{referencias.bib}
+\begin{document}
+
+\begin{center}
+    {\large\textbf{UNIVERSIDAD TÉCNICA ESTATAL DE QUEVEDO}}\par
+
+    Facultad de Ciencias de la Computación\\
+    Carrera de Software\par
+
+    \vspace{0.6cm}
+
+    {\LARGE\bfseries
+        Comparación entre modelos de proceso\\
+        de requisitos en escenarios reales\par
+    }
+
+    \vspace{0.2cm}
+
+    {\large GA-PRAC-01}\\
+    Actividad formativa grupal
+\end{center}
+
+\vspace{0.4cm}
+
+\section{Datos informativos}
+
+\begin{tabularx}{\textwidth}{|l|X|}
+    \hline
+    \rowcolor{gray!15}
+    \textbf{Campo} & \textbf{Detalle} \\ \hline
+    Integrantes \textperiodcentered{} CEV &
+    Contreras Chavez Kevin German\newline
+    Espinoza Pivaque Angelo Maximiliano\newline
+    Vaca Romero David Octavio \\ \hline
+    Asignatura & Ingeniería de Requerimientos (ISR-401) \\ \hline
+    Nivel y paralelo & Cuarto nivel, paralelo A \\ \hline
+    Docente & Gleiston Cicerón Guerrero Ulloa, PhD \\ \hline
+    Código de la actividad & GA-PRAC-01 --- FORM \\ \hline
+    Fecha límite de entrega & Viernes 13 de noviembre de 2026, 00:00 \\ \hline
+\end{tabularx}
+
+\section{Caracterización de los modelos de proceso de requisitos}
+
+La comparación considera cuándo se definen los requisitos, cómo se
+incorporan los cambios y en qué momentos participan las partes
+interesadas. La caracterización se basa en la sección 2 y la Tabla 2
+del material complementario de la práctica \cite{materialGA}.
+
+\subsection{Modelo secuencial o en cascada}
+
+El proyecto se organiza en fases: definición de requisitos, diseño,
+implementación y pruebas. Al inicio, el equipo obtiene, analiza y
+documenta los requisitos con las partes interesadas. Una vez aprobada,
+la especificación sirve de base para el diseño y las pruebas. Si luego
+se solicita un cambio, se revisa su impacto antes de actualizar lo
+acordado. El modelo supone que los requisitos principales se pueden
+definir temprano y que el cliente puede participar en su aprobación.
+Conviene cuando el alcance es estable y se requieren documentos
+aprobados para avanzar entre fases \cite{materialGA}.
+
+\subsection{Modelo iterativo e incremental}
+
+El equipo parte de un conjunto inicial de requisitos y lo refina en
+ciclos. En cada ciclo se selecciona una parte del alcance, se precisan
+sus requisitos y se construye un avance que las partes interesadas
+pueden revisar. La iteración permite corregir o precisar lo que ya se
+había definido, mientras que el incremento añade una parte funcional
+al producto. Este modelo conviene cuando el objetivo general está
+claro, quedan detalles por resolver y el cliente puede revisar avances
+al cierre de cada ciclo \cite{materialGA}.
+
+\subsection{Modelo ágil}
+
+Los requisitos se gestionan en una lista priorizada que se actualiza
+a medida que el equipo aprende sobre el producto. Antes de cada ciclo
+corto, se detallan los elementos próximos a desarrollarse y se
+acuerdan criterios de aceptación. Al revisar el incremento, las
+partes interesadas dan retroalimentación y el representante del
+cliente puede ajustar las prioridades. Este modelo conviene cuando
+se esperan cambios frecuentes y hay una persona con disponibilidad
+y autoridad para aclarar necesidades y decidir prioridades
+\cite{materialGA}.
+
+\printbibliography[title={Referencias}]
+
+\section*{Declaración de uso de inteligencia artificial}
+
+Se utilizó ChatGPT como apoyo para organizar las ideas de la sección
+sobre los modelos de proceso de requisitos. La revisión se centró en
+ordenar los apartados, corregir faltas de ortografía y puntuación, y
+mejorar los conectores entre párrafos para dar continuidad a la explicación.
+
+\end{document}
