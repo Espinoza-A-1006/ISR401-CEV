@@ -5,24 +5,32 @@ Requerimientos (ISR-401) de la Universidad Técnica Estatal de Quevedo.
 
 ## GA-PRAC-01 · Comparación de modelos de proceso de requisitos
 
-**Primer avance — C1.** Caracterización de los modelos en cascada,
-iterativo e incremental, y ágil. Se describen sus fases o ciclos,
-sus supuestos y las condiciones en las que conviene aplicarlos.
+El informe caracteriza los modelos en cascada, iterativo e incremental,
+y ágil. El segundo avance incluye las matrices comparativas, las
+recomendaciones y los riesgos de dos escenarios: la extractora de aceite
+de palma y la aplicación de pedidos de comida típica. También incluye
+los actores y el marco de ingeniería de requisitos aplicados a la extractora.
 
-### Archivos
+### Archivos del informe
 
 | Archivo | Contenido |
 |---|---|
-| `GA-PRAC-01/main.tex` | Informe del primer avance |
-| `GA-PRAC-01/referencias.bib` | Bibliografía del informe |
-| `GA-PRAC-01/main.pdf` | PDF compilado del primer avance |
+| [`GA-PRAC-01/main.tex`](GA-PRAC-01/main.tex) | Archivo principal del informe en LaTeX. |
+| [`GA-PRAC-01/referencias.bib`](GA-PRAC-01/referencias.bib) | Fuentes citadas en el informe. |
+| [`GA-PRAC-01/main.pdf`](GA-PRAC-01/main.pdf) | Informe compilado. |
 
 ### Compilación
 
-El archivo principal es `main.tex`. Se requiere una distribución LaTeX
-con `pdfLaTeX`, `Biber`, `biblatex` y el estilo `biblatex-ieee`.
+- **Archivo principal:** `GA-PRAC-01/main.tex`.
+- **Compilador:** pdfLaTeX.
+- **Dependencias:** una distribución LaTeX con Biber y los paquetes
+  `babel` con soporte para español, `lmodern`, `geometry`, `array`,
+  `tabularx`, `xltabular`, `fancyhdr`, `xcolor`, `hyperref`, `biblatex`
+  y el estilo `biblatex-ieee`.
+- **Bibliografía:** `referencias.bib` debe estar en la misma carpeta
+  que `main.tex`.
 
-Desde la raíz del repositorio, ejecuta:
+Desde la raíz del repositorio, ejecuta estos comandos en orden:
 
 ```sh
 cd GA-PRAC-01
@@ -32,8 +40,8 @@ pdflatex main.tex
 pdflatex main.tex
 ```
 
-En Overleaf, selecciona `main.tex` como documento principal,
-usa **pdfLaTeX** y pulsa **Recompilar**.
+El PDF se genera como `GA-PRAC-01/main.pdf`.
 
-**Siguiente avance:** C2, matriz comparativa aplicada al escenario
-o a los escenarios que confirme el docente.
+En Overleaf, selecciona `main.tex` como documento principal y
+**pdfLaTeX** como compilador. Pulsa **Recompilar** y comprueba que
+aparezcan las dos fuentes en la sección **Referencias**.
